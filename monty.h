@@ -3,7 +3,9 @@
 
 #include <stdlib.h>
 #include <errno.h>
-#include <fnctl.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
 
 /**
 	* struct stack_s - doubly linked list representation of a stack (or queue)
@@ -31,5 +33,18 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+instruction_t opcodelist[] =  {
+	{ .opcode = "push", .fptr = push},
+	{ .opcode = "pall", .fptr = pall},
+	{ .opcode = "pop", .fptr = pop},
+	{ .opcode = "add", .fptr = add},
+	{ .opcode = "nop", .fptr = nop}
+}
+
+#define OPCODE_LEN 5
+
+char **getln_split();
+int interpreter(char **arraycmd);
 
 #endif
