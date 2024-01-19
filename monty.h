@@ -31,20 +31,19 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*fptr)(stack_t **stack, unsigned int line_number, char **arrcmd);
 } instruction_t;
 
-instruction_t opcodelist[] =  {
-	{ .opcode = "push", .fptr = push},
-	{ .opcode = "pall", .fptr = pall},
-	{ .opcode = "pop", .fptr = pop},
-	{ .opcode = "add", .fptr = add},
-	{ .opcode = "nop", .fptr = nop}
-}
+char **getln_split(stack_t **elements);
+int interpreter(char **arraycmd, stack_t **elements, unsigned int line_number);
+void push(stack_t **elements, unsigned int line_number, char **arrcmd);
+void pall(stack_t **elements, unsigned int ln_num, char **arrcmd);
+void pop(stack_t **elements, unsigned int ln_num, char **arrcmd);
+void freelist(stack_t **elements, char **arrcmd);
+void bad_malloc(stack_t **elements, char **arrcmd);
 
-#define OPCODE_LEN 5
+extern instruction_t opcodelist[];
 
-char **getln_split();
-int interpreter(char **arraycmd);
+#define OPCODE_LEN 3
 
 #endif
