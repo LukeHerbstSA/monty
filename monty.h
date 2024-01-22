@@ -34,7 +34,7 @@ typedef struct instruction_s
 	void (*fptr)(stack_t **stack, unsigned int line_number, char **arrcmd);
 } instruction_t;
 
-char **getln_split(stack_t **elements);
+char **getln_split(FILE *fp);
 int interpreter(char **arraycmd, stack_t **elements, unsigned int line_number);
 void push(stack_t **elements, unsigned int line_number, char **arrcmd);
 void pall(stack_t **elements, unsigned int ln_num, char **arrcmd);
