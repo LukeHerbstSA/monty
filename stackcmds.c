@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+	* push - void func
+	* Description: adds arrcmd[1] to elements list
+	* @elements: passed doubly list
+	* @ln_num: passed line number of monty code
+	* @arrcmd: array of cmds
+	*/
 void push(stack_t **elements, unsigned int ln_num, char **arrcmd)
 {
 	char *endptr = NULL;
@@ -25,19 +32,14 @@ void push(stack_t **elements, unsigned int ln_num, char **arrcmd)
 		free(newnode);
 		exit(EXIT_FAILURE);
 	}
-	printf("just before tmp assignment\nValue: %d\n", value);
 	if (tmp == NULL)
 	{
-		printf("before setting newnode->n\n");
 		newnode->n = value;
-		printf("After setting newnode->n\n");
 		newnode->next = NULL;
 		newnode->prev = NULL;
-		printf("After newnode assignment\n");
 		*elements = newnode;
 		return;
 	}
-	printf("After tmp == NULL assignment\n");
 	while (tmp != NULL)
 	{
 		if (tmp->next == NULL)
@@ -52,15 +54,19 @@ void push(stack_t **elements, unsigned int ln_num, char **arrcmd)
 	}
 }
 
+/**
+	* pall - void func
+	* Description: prints whole doubly list
+	* @elements: passed doubly list
+	* @ln_num: passed line number of monty code
+	* @arrcmd: array of cmds
+	*/
 void pall(stack_t **elements, unsigned int ln_num, char **arrcmd)
 {
 	stack_t *tmp = *elements;
 	
-	if (*elements == NULL)
-	{
-		fprintf(stderr, "L%d: NULL list, arrcmd[0]: %s\n", ln_num, arrcmd[0]);
+	if (*elements == NULL || ln_num == 0 || arrcmd == NULL)
 		return;
-	}
 	while (tmp != NULL)
 	{
 		if (tmp->next == NULL)
@@ -79,12 +85,26 @@ void pall(stack_t **elements, unsigned int ln_num, char **arrcmd)
 	}
 }
 
+/**
+        * pint - void func
+        * Description: prints value at top stack
+        * @elements: passed doubly list
+        * @ln_num: passed line number of monty code
+        * @arrcmd: array of cmds
+        */
 void pint(stack_t *elements, unsigned int ln_num, char **arrcmd)
 {
 	if (elements != NULL || ln_num > 0 || arrcmd != NULL)
 		return;
 }
 
+/**
+        * push - void func
+        * Description: pops calue at top stack
+        * @elements: passed doubly list
+        * @ln_num: passed line number of monty code
+        * @arrcmd: array of cmds
+        */
 void pop(stack_t **elements, unsigned int ln_num, char **arrcmd)
 {
 	stack_t *tmp = NULL;
@@ -92,11 +112,8 @@ void pop(stack_t **elements, unsigned int ln_num, char **arrcmd)
 
 	tmp = *elements;
 	prev = *elements;
-	if (tmp == NULL)
-	{
-		fprintf(stderr, "L%d: NULL list, arrcmd[0]: %s\n", ln_num, arrcmd[0]);
+	if (tmp == NULL || ln_num == 0 || arrcmd == NULL)
 		return;
-	}
 	if (tmp->next == NULL)
 		*elements = NULL;
 	while (tmp != NULL)

@@ -1,9 +1,16 @@
 #include "monty.h"
 
+/**
+	* interpreter - int func
+	* Description: calls function pointers based on opcode
+	* @arrcmd: array of pointers
+	* @elements: stack_t doubly
+	* @line_number: line number of monty code
+	* Return: 0 on success or -1
+	*/
 int interpreter(char **arrcmd, stack_t **elements, unsigned int line_number)
 {
 	int i = 0;
-	int j = 0;
 
 	instruction_t opcodelist[] =  {
 	{ "push", push},
@@ -17,16 +24,10 @@ int interpreter(char **arrcmd, stack_t **elements, unsigned int line_number)
 	{
 		if (strcmp(opcodelist[i].opcode, arrcmd[0]) == 0)
 		{
-			printf("Entering stackcmds\n");
-			for (j = 0; arrcmd[j] != NULL; j++)
-			{
-				printf("arrcmd[j]: %s\n", arrcmd[j]);
-			}
 			(opcodelist[i].fptr)(elements, line_number, arrcmd);
 			break;
 		}
 	}
-	printf("After calling function pointer\n");
 	if (i == OPCODE_LEN)
 		return (-1);
 	return (0);

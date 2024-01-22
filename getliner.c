@@ -1,6 +1,11 @@
 #include "monty.h"
-#include <stdio.h>
 
+/**
+	* getln_split - char ** array func
+	* Description: returns char ** array from a line
+	* @fp: passed file descriptor (not pointer)
+	* Return: array pointers
+	*/
 char **getln_split(FILE *fp)
 {
 	char **arrcmd = NULL;
@@ -12,17 +17,14 @@ char **getln_split(FILE *fp)
 	int numtoken = 0;
 	int i = 0;
 
-	printf("Just before getline call\n");
 	if (fgets(unedit_ln, linesize, fp) == NULL)
 	{
 		free(unedit_ln);
 		return (NULL);
 	}
-	printf("After geline call\n");
 	line = malloc(strlen(unedit_ln) + 1);
 	for (i = 0; unedit_ln[i] != '\n' && unedit_ln[i] != '\0'; i++)
 		line[i] = unedit_ln[i];
-	printf("After line assignment and removing newline\n");
 	line[i] = '\0';
 	i = 0;
 	free(unedit_ln);
@@ -35,7 +37,6 @@ char **getln_split(FILE *fp)
 		token = strtok(NULL, " ");
 	free(line);
 	arrcmd = malloc((numtoken + 1) * sizeof(char *));
-	printf("Afterr arrcmd malloc\n");
 	if (arrcmd == NULL)
 		bad_malloc(NULL, arrcmd);
 	token = strtok(linecopy, " ");
@@ -54,7 +55,6 @@ char **getln_split(FILE *fp)
 		}
 		token = strtok(NULL, " ");
 	}
-	printf("after assigning arrcmd\n");
 	arrcmd[i] = NULL;
 	free(linecopy);
 	return (arrcmd);
