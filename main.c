@@ -42,10 +42,14 @@ int main(int argc, char *argv[])
 			break;
 		gen_check = interpreter(arrcmd, elements, line_number);
 		if (gen_check == -1)
+		{
 			fprintf(stderr, "L%u: unknown instruction %s", line_number, arrcmd[0]);
+			break;
+		}
 		for (i = 0; arrcmd[i] != NULL; i++)
 			free(arrcmd[i]);
-		free(arrcmd);
+		if (arrcmd != NULL)
+			free(arrcmd);
 	}
 	fclose(open_check);
 	freelist(elements, arrcmd);

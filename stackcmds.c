@@ -20,14 +20,14 @@ void push(stack_t **elements, unsigned int ln_num, char **arrcmd)
 		bad_malloc(elements, arrcmd);
 	if (arrcmd[1] == NULL)
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", ln_num, arrcmd[0]);
+		fprintf(stderr, "L%d: usage: push integer\n", ln_num);
 		freelist(elements, arrcmd);
 		exit(EXIT_FAILURE);
 	}
 	value = strtol(arrcmd[1], &endptr, 10);
 	if (*endptr != '\0')
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", ln_num, arrcmd[0]);
+		fprintf(stderr, "L%d: usage: push integer\n", ln_num);
 		freelist(elements, arrcmd);
 		free(newnode);
 		exit(EXIT_FAILURE);
