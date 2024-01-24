@@ -51,7 +51,8 @@ int main(int argc, char *argv[])
 		if (arrcmd != NULL)
 			free(arrcmd);
 	}
-	fclose(open_check);
+	if (open_check != NULL)
+		fclose(open_check);
 	freelist(elements, arrcmd);
 	if (gen_check == -1)
 		exit(EXIT_FAILURE);

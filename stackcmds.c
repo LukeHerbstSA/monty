@@ -21,6 +21,7 @@ void push(stack_t **elements, unsigned int ln_num, char **arrcmd)
 	if (arrcmd[1] == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", ln_num);
+		free(newnode);
 		freelist(elements, arrcmd);
 		exit(EXIT_FAILURE);
 	}
